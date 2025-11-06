@@ -5,46 +5,38 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.github.heathcetide</groupId>
-    <artifactId>cetide.hibiscus.signal</artifactId>
+    <artifactId>hibiscus-signal-parent</artifactId>
     <version>1.1.0</version>
+    <packaging>pom</packaging>
 
-    <properties>
-        <spring-boot.version>2.4.5</spring-boot.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <maven-surefire-plugin.version>3.0.0</maven-surefire-plugin.version>
-        <jackson-databind.version>2.13.4.2</jackson-databind.version>
-    </properties>
+    <name>Hibiscus Signal Parent</name>
+    <description>
+        Hibiscus Signal - A robust event-driven system designed to manage signals, events, and handlers in a highly flexible and scalable way.
+    </description>
 
-
-    <url>https://github.com/heathcetide/hibiscus-signal</url>
+    <url>https://github.com/Hibiscus-Tool/hibiscus-signal</url>
 
     <licenses>
         <license>
-            <name>cetide.hibiscus</name>
-            <url>https://github.com/heathcetide/hibiscus-signal</url>
+            <name>Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
 
-    <description>
-        Hibiscus Signal - Hibiscus Signal is a robust event-driven system designed to manage signals, events, and handlers in a highly flexible and scalable way. process events asynchronously or synchronously, and manage event-based workflows with advanced features such as interceptors, filters, transformers, and metrics collection.
-    </description>
-
     <developers>
         <developer>
             <name>heathcetide</name>
-            <email>2148582258@qq.com</email>
-            <organization>Sonatype</organization>
-            <organizationUrl>https://github.com/heathcetide</organizationUrl>
+            <email>19511899044@163.com</email>
+            <organization>Hibiscus-Tool</organization>
+            <organizationUrl>https://github.com/Hibiscus-Tool</organizationUrl>
         </developer>
     </developers>
 
     <scm>
-        <connection>scm:git:https://github.com/heathcetide/hibiscus-signal.git</connection>
-        <developerConnection>scm:git:https://github.com/heathcetide/hibiscus-signal.git</developerConnection>
-        <url>https://github.com/heathcetide/hibiscus-signal</url>
+        <connection>scm:git:https://github.com/Hibiscus-Tool/hibiscus-signal.git</connection>
+        <developerConnection>scm:git:https://github.com/Hibiscus-Tool/hibiscus-signal.git</developerConnection>
+        <url>https://github.com/Hibiscus-Tool/hibiscus-signal</url>
     </scm>
 
     <distributionManagement>
@@ -58,108 +50,154 @@
         </repository>
     </distributionManagement>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.version>3.8.1</maven.compiler.version>
+        <maven-surefire-plugin.version>3.0.0</maven-surefire-plugin.version>
+        <maven.source.plugin.version>3.2.1</maven.source.plugin.version>
+        <maven.javadoc.plugin.version>3.4.1</maven.javadoc.plugin.version>
+        
+        <!-- Spring Boot Version -->
+        <spring-boot.version>2.7.14</spring-boot.version>
+        
+        <!-- Dependency Versions -->
+        <jackson-databind.version>2.13.4.2</jackson-databind.version>
+        <aspectj.version>1.9.20</aspectj.version>
+        <transmittable-thread-local.version>2.14.2</transmittable-thread-local.version>
+        <junit-jupiter.version>5.8.2</junit-jupiter.version>
+        <logback.version>1.2.6</logback.version>
+    </properties>
+
+    <modules>
+        <module>hibiscus-signal-core</module>
+        <module>hibiscus-signal-spring</module>
+        <module>hibiscus-signal-examples</module>
+    </modules>
+
     <dependencyManagement>
         <dependencies>
+            <!-- Spring Boot Dependencies -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>2.7.14</version>
+                <version>${spring-boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <!-- Hibiscus Signal Modules -->
+            <dependency>
+                <groupId>io.github.heathcetide</groupId>
+                <artifactId>hibiscus-signal-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.heathcetide</groupId>
+                <artifactId>hibiscus-signal-spring</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.heathcetide</groupId>
+                <artifactId>hibiscus-signal-examples</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- Core Dependencies -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson-databind.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.datatype</groupId>
+                <artifactId>jackson-datatype-jsr310</artifactId>
+                <version>2.13.4</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>transmittable-thread-local</artifactId>
+                <version>${transmittable-thread-local.version}</version>
+            </dependency>
+
+            <!-- Spring Dependencies -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>5.3.23</version>
+            </dependency>
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjrt</artifactId>
+                <version>${aspectj.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>${aspectj.version}</version>
+            </dependency>
+
+            <!-- Test Dependencies -->
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter</artifactId>
+                <version>${junit-jupiter.version}</version>
+                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>5.8.2</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- Logback Classic (包含 SLF4J API 和 Logback 实现) -->
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.2.6</version> <!-- 或者选择其他版本 -->
-            <scope>provided</scope>
-        </dependency>
-
-        <!-- Spring Context dependency, provided scope -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>5.3.23</version>
-        </dependency>
-
-        <!-- Spring Boot Auto Configuration -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-autoconfigure</artifactId>
-        </dependency>
-
-        <!-- AspectJ runtime dependency (AspectJ runtime is required for Spring AOP to work) -->
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjrt</artifactId>
-            <version>1.9.20</version>
-        </dependency>
-
-        <!-- AspectJ compiler (optional, only if you need compile-time weaving) -->
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjweaver</artifactId>
-            <version>1.9.20</version>
-        </dependency>
-
-        <!-- transmittable-thread-local -->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>transmittable-thread-local</artifactId>
-            <version>2.14.2</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>${jackson-databind.version}</version>
-        </dependency>
-
-        <!-- Jackson JSR310 support for LocalDateTime serialization -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.datatype</groupId>
-            <artifactId>jackson-datatype-jsr310</artifactId>
-            <version>2.13.4</version>
-        </dependency>
-
-        <!-- Redis Module -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-            <optional>true</optional>
-        </dependency>
-
-
-        <!-- JPA Module -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-            <optional>true</optional>
-        </dependency>
-
-        <!-- RabbitMQ 依赖 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-amqp</artifactId>
-            <optional>true</optional>
-        </dependency>
-
-        <!-- Kafka 依赖 -->
-        <dependency>
-            <groupId>org.springframework.kafka</groupId>
-            <artifactId>spring-kafka</artifactId>
-            <optional>true</optional>
-        </dependency>
-    </dependencies>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven.compiler.version}</version>
+                    <configuration>
+                        <source>${maven.compiler.source}</source>
+                        <target>${maven.compiler.target}</target>
+                        <encoding>${project.build.sourceEncoding}</encoding>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${maven-surefire-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>${maven.source.plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>attach-sources</id>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>${maven.javadoc.plugin.version}</version>
+                    <configuration>
+                        <encoding>${project.build.sourceEncoding}</encoding>
+                        <charset>${project.build.sourceEncoding}</charset>
+                        <docencoding>${project.build.sourceEncoding}</docencoding>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>attach-javadocs</id>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>

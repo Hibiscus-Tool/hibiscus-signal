@@ -80,22 +80,71 @@
 
 ---
 
+## 📦 项目结构
+
+本项目采用多模块 Maven 项目结构：
+
+```
+hibiscus-signal/
+├── hibiscus-signal-parent/          # 父 POM（聚合器）
+├── hibiscus-signal-core/             # 核心模块（无 Spring 依赖）
+│   ├── 核心信号处理
+│   ├── 异常处理
+│   └── 工具类
+├── hibiscus-signal-spring/           # Spring Boot 集成模块
+│   ├── Spring 注解
+│   ├── 自动配置
+│   ├── 持久化支持
+│   ├── 事务支持
+│   └── 事件溯源
+└── hibiscus-signal-examples/        # 示例代码
+    └── 使用示例
+```
+
+### 模块依赖关系
+
+- **hibiscus-signal-core**: 独立的核心功能
+- **hibiscus-signal-spring**: 依赖 `hibiscus-signal-core`，添加 Spring Boot 支持
+- **hibiscus-signal-examples**: 依赖 `hibiscus-signal-core` 和 `hibiscus-signal-spring`
+
+---
+
 ## 快速开始
 
 ### Maven 依赖
 
+对于 Spring Boot 应用（推荐）：
+
 ```xml
 <dependency>
     <groupId>io.github.heathcetide</groupId>
-    <artifactId>cetide.hibiscus.signal</artifactId>
+    <artifactId>hibiscus-signal-spring</artifactId>
+    <version>1.1.0</version>
+</dependency>
+```
+
+仅需核心功能（不使用 Spring）：
+
+```xml
+<dependency>
+    <groupId>io.github.heathcetide</groupId>
+    <artifactId>hibiscus-signal-core</artifactId>
     <version>1.1.0</version>
 </dependency>
 ```
 
 ### Gradle 依赖
 
+对于 Spring Boot 应用：
+
 ```gradle
-implementation 'io.github.heathcetide:cetide.hibiscus.signal:1.1.0'
+implementation 'io.github.heathcetide:hibiscus-signal-spring:1.1.0'
+```
+
+仅需核心功能：
+
+```gradle
+implementation 'io.github.heathcetide:hibiscus-signal-core:1.1.0'
 ```
 
 ### 基本配置

@@ -80,22 +80,69 @@
 
 ---
 
-## Quick Start
+## 📦 Project Structure
+
+This project is organized as a multi-module Maven project:
+
+```
+hibiscus-signal/
+├── hibiscus-signal-parent/          # Parent POM (aggregator)
+├── hibiscus-signal-core/             # Core module (no Spring dependencies)
+│   ├── Core signal processing
+│   ├── Exception handling
+│   └── Utility classes
+├── hibiscus-signal-spring/           # Spring Boot integration module
+│   ├── Spring annotations
+│   ├── Auto-configuration
+│   ├── Persistence support
+│   ├── Transaction support
+│   └── Event sourcing
+└── hibiscus-signal-examples/        # Example code
+    └── Usage examples
+```
+
+### Module Dependencies
+
+- **hibiscus-signal-core**: Standalone core functionality
+- **hibiscus-signal-spring**: Depends on `hibiscus-signal-core`, adds Spring Boot support
+- **hibiscus-signal-examples**: Depends on both `hibiscus-signal-core` and `hibiscus-signal-spring`
+
+---
 
 ### Maven Dependency
+
+For Spring Boot applications (recommended):
 
 ```xml
 <dependency>
     <groupId>io.github.heathcetide</groupId>
-    <artifactId>cetide.hibiscus.signal</artifactId>
+    <artifactId>hibiscus-signal-spring</artifactId>
+    <version>1.1.0</version>
+</dependency>
+```
+
+For core functionality only (without Spring):
+
+```xml
+<dependency>
+    <groupId>io.github.heathcetide</groupId>
+    <artifactId>hibiscus-signal-core</artifactId>
     <version>1.1.0</version>
 </dependency>
 ```
 
 ### Gradle Dependency
 
+For Spring Boot applications:
+
 ```gradle
-implementation 'io.github.heathcetide:cetide.hibiscus.signal:1.1.0'
+implementation 'io.github.heathcetide:hibiscus-signal-spring:1.1.0'
+```
+
+For core functionality only:
+
+```gradle
+implementation 'io.github.heathcetide:hibiscus-signal-core:1.1.0'
 ```
 
 ### Basic Configuration
